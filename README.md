@@ -27,6 +27,7 @@ Here's a quote from [W3C Timers Specification](http://www.w3.org/TR/2011/WD-html
 
 - `active` -> `Boolean` - Is it still active?
 - `clear()` -> `void` - Clear timeout/interval
+- `reset()` -> `void` - Reset elapsed time
 - (private) `tick(deltaTime)` -> `void`
 - (private) `execute()` -> `void`
 

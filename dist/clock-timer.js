@@ -120,6 +120,11 @@ var Delayed = (function () {
       }
     }
   }, {
+    key: 'reset',
+    value: function reset() {
+      this.elapsedTime = 0;
+    }
+  }, {
     key: 'clear',
     value: function clear() {
       this.active = false;

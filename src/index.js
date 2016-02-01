@@ -32,6 +32,10 @@ class Delayed {
     }
   }
 
+  reset () {
+    this.elapsedTime = 0
+  }
+
   clear () {
     this.active = false;
   }
