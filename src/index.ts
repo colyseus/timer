@@ -1,10 +1,19 @@
-import Clock from 'clock.js'
+import Clock from "clock.js"
 
-var TYPE_INTERVAL = 0
-  , TYPE_TIMEOUT = 1
+const TYPE_INTERVAL = 0
+    , TYPE_TIMEOUT = 1
 
-class Delayed {
-  constructor (handler, args, time, type) {
+export class Delayed {
+
+  public active: boolean;
+  public time: number;
+  public elapsedTime: number;
+
+  protected handler: Function;
+  protected args: any;
+  protected type: number;
+
+  constructor (handler: Function, args: any, time: number, type: number) {
     this.active = true
 
     this.handler = handler
@@ -15,7 +24,7 @@ class Delayed {
     this.type = type
   }
 
-  tick (deltaTime) {
+  tick (deltaTime: number) {
     this.elapsedTime += deltaTime
     if (this.elapsedTime >= this.time) {
       this.execute()
@@ -43,7 +52,9 @@ class Delayed {
 
 class ClockTimer extends Clock {
 
-  constructor (autoStart) {
+  delayed: Delayed[];
+
+  constructor (autoStart: boolean) {
     super(autoStart)
     this.delayed = []
   }
@@ -61,13 +72,13 @@ class ClockTimer extends Clock {
     }
   }
 
-  setInterval (handler, time, ...args) {
+  setInterval (handler: Function, time: number, ...args: any[]) {
     var delayed = new Delayed(handler, args, time, TYPE_INTERVAL)
     this.delayed.push(delayed)
     return delayed;
   }
 
-  setTimeout (handler, time, ...args) {
+  setTimeout (handler: Function, time: number, ...args: any[]) {
     var delayed = new Delayed(handler, args, time, TYPE_TIMEOUT)
     this.delayed.push(delayed)
     return delayed;
@@ -75,4 +86,4 @@ class ClockTimer extends Clock {
 
 }
 
-module.exports = ClockTimer
+export default ClockTimer

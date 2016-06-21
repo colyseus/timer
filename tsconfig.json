@@ -1,0 +1,13 @@
+{
+  "baseDir": "src/",
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "sourceMap": false
+  },
+  "exclude": [
+    "node_modules",
+    "test"
+  ]
+}
