@@ -1,5 +1,5 @@
 var assert = require("assert");
-var ClockTimer = require('../src/index.js')
+var ClockTimer = require('../dist/index.js').default
 
 describe('clock', function() {
 

@@ -7,7 +7,7 @@
   "scripts": {
     "dist": "browserify ./src/index.js -t babelify -s ClockTimer -o dist/clock-timer.js && uglifyjs dist/clock-timer.js > dist/clock-timer.min.js",
     "prepublish": "rimraf ./dist && tsc -d",
-    "test": "npm run prepublish && mocha --compilers js:babel-register"
+    "test": "npm run prepublish && mocha"
   },
   "repository": {
     "type": "git",
