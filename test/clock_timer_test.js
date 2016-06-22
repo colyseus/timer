@@ -5,8 +5,8 @@ describe('clock', function() {
 
   describe('#setTimeout', function () {
     it('timeout should execute only once', function (done) {
-      let clock = new ClockTimer()
-      let delayed = clock.setTimeout(function() {
+      var clock = new ClockTimer()
+      var delayed = clock.setTimeout(function() {
         assert.equal(delayed.elapsedTime, clock.elapsedTime)
       }, 100)
 
@@ -20,9 +20,9 @@ describe('clock', function() {
 
   describe('#setInterval', function () {
     it('interval should execute indefinately', function (done) {
-      let count = 0;
-      let clock = new ClockTimer()
-      let delayed = clock.setInterval(function() {
+      var count = 0;
+      var clock = new ClockTimer()
+      var delayed = clock.setInterval(function() {
         count++
       }, 50)
 
