@@ -14,7 +14,7 @@ export declare class Delayed {
 }
 declare class ClockTimer extends Clock {
     delayed: Delayed[];
-    constructor(autoStart: boolean);
+    constructor(autoStart?: boolean);
     tick(): void;
     setInterval(handler: Function, time: number, ...args: any[]): Delayed;
     setTimeout(handler: Function, time: number, ...args: any[]): Delayed;

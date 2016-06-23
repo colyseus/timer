@@ -54,7 +54,7 @@ class ClockTimer extends Clock {
 
   delayed: Delayed[];
 
-  constructor (autoStart: boolean) {
+  constructor (autoStart: boolean = false) {
     super(autoStart)
     this.delayed = []
   }

@@ -42,6 +42,7 @@ exports.Delayed = Delayed;
 var ClockTimer = (function (_super) {
     __extends(ClockTimer, _super);
     function ClockTimer(autoStart) {
+        if (autoStart === void 0) { autoStart = false; }
         _super.call(this, autoStart);
         this.delayed = [];
     }
