@@ -1,4 +1,4 @@
-import Clock from "clock.js"
+import Clock = require("clock.js")
 
 const TYPE_INTERVAL = 0
     , TYPE_TIMEOUT = 1

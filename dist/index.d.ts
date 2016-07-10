@@ -1,4 +1,4 @@
-import Clock from "clock.js";
+import Clock = require("clock.js");
 export declare class Delayed {
     active: boolean;
     time: number;

@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var clock_js_1 = require("clock.js");
+var Clock = require("clock.js");
 var TYPE_INTERVAL = 0, TYPE_TIMEOUT = 1;
 var Delayed = (function () {
     function Delayed(handler, args, time, type) {
@@ -75,6 +75,6 @@ var ClockTimer = (function (_super) {
         return delayed;
     };
     return ClockTimer;
-}(clock_js_1["default"]));
+}(Clock));
 exports.__esModule = true;
 exports["default"] = ClockTimer;
