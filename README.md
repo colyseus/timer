@@ -1,5 +1,7 @@
 # clock-timer.js [![Build Status](https://secure.travis-ci.org/gamestdio/clock-timer.js.png?branch=master)](http://travis-ci.org/gamestdio/clock-timer.js)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/gamestdio/clock-timer.js.svg)](https://greenkeeper.io/)
+
 Timing Events tied to [clock.js](https://github.com/gamestdio/clock.js).
 
 `ClockTimer` is a subclass of `Clock`, which adds methods to handle timeout and
