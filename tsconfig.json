@@ -1,13 +1,17 @@
 {
-  "baseDir": "src/",
+  "baseDir": "src",
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": ".",
+    "target": "ES5",
     "module": "commonjs",
     "noImplicitAny": true,
-    "sourceMap": false
+    "sourceMap": false,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true
   },
   "exclude": [
     "node_modules",
-    "test"
+    "test",
+    "dist"
   ]
 }
