@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/gamestdio/clock-timer.js#readme",
   "dependencies": {
-    "clock.js": "^1.1.5"
+    "clock.js": "1.1.5"
   },
   "devDependencies": {
     "assert": "^1.3.0",
