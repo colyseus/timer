@@ -1,12 +1,12 @@
 {
   "name": "clock-timer.js",
-  "version": "1.1.5-beta.5",
+  "version": "1.1.6",
   "description": "Timing Events tied to clock.js",
-  "main": "index.js",
-  "typings": "index.d.ts",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "prepublish": "tsc",
-    "test": "npm run prepublish && mocha"
+    "test": "mocha --require ts-node/register test/**Test.ts"
   },
   "repository": {
     "type": "git",
@@ -30,9 +30,11 @@
     "clock.js": "^1.1.5"
   },
   "devDependencies": {
+    "@types/mocha": "^2.2.41",
     "assert": "^1.3.0",
     "mocha": "^3.2.0",
     "rimraf": "^2.5.2",
-    "typescript": "^2.1.5"
+    "ts-node": "^3.2.0",
+    "typescript": "^2.4.1"
   }
 }
