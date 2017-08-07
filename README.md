@@ -1,4 +1,4 @@
-# clock-timer.js [![Build Status](https://secure.travis-ci.org/gamestdio/clock-timer.js.png?branch=master)](http://travis-ci.org/gamestdio/clock-timer.js)
+# @gamestdio/timer [![Build Status](https://secure.travis-ci.org/gamestdio/clock-timer.js.png?branch=master)](http://travis-ci.org/gamestdio/clock-timer.js)
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/gamestdio/clock-timer.js.svg)](https://greenkeeper.io/)
 
