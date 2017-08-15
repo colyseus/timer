@@ -1,4 +1,4 @@
-import Clock = require("clock.js");
+import Clock = require("@gamestdio/clock");
 import { Delayed, Type } from "./Delayed";
 
 export class ClockTimer extends Clock {
