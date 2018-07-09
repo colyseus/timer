@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@gamestdio/clock@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.npmjs.org/@gamestdio/clock/-/clock-1.1.8.tgz#bf99f2befffa5976c3173fe1de5a52d9dce169ef"
+
 "@types/mocha@^2.2.41":
   version "2.2.41"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.41.tgz#e27cf0817153eb9f2713b2d3f6c68f1e1c3ca608"
@@ -44,10 +48,6 @@ chalk@^2.0.0:
     ansi-styles "^3.1.0"
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
-
-clock.js@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/clock.js/-/clock.js-1.1.5.tgz#c1186cd7e328cc838006d1d2a74eac72070b8f45"
 
 color-convert@^1.0.0:
   version "1.9.0"
