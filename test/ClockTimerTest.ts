@@ -5,9 +5,9 @@ describe('clock', function() {
 
   describe('#setTimeout', function () {
     it('timeout should execute only once', function (done) {
-      var clock = new ClockTimer();
+      const clock = new ClockTimer();
 
-      var delayed = clock.setTimeout(() => {
+      const delayed = clock.setTimeout(() => {
         assert.equal(delayed.elapsedTime, clock.elapsedTime);
       }, 100);
 
@@ -17,19 +17,62 @@ describe('clock', function() {
         done();
       }, 100);
     });
+
+    it('should allow to pause a timeout', function (done) {
+      const clock = new ClockTimer();
+
+      const delayed = clock.setTimeout(() => {
+        assert.ok(delayed.elapsedTime >= 100);
+        assert.ok(delayed.elapsedTime < 150);
+      }, 100);
+
+      setTimeout(() => {
+        clock.tick();
+        delayed.pause();
+
+        assert.equal(true, delayed.active);
+        assert.equal(true, delayed.paused);
+
+        setTimeout(() => {
+          clock.tick();
+          delayed.resume();
+
+          assert.equal(true, delayed.active);
+          assert.equal(false, delayed.paused);
+
+          setTimeout(() => {
+            clock.tick();
+
+            assert.equal(true, delayed.active);
+            assert.equal(false, delayed.paused);
+
+            setTimeout(() => {
+              clock.tick();
+
+              assert.equal(false, delayed.active);
+              assert.equal(false, delayed.paused);
+
+              done();
+            }, 20);
+          }, 10);
+        }, 100)
+      }, 70);
+
+    });
   });
 
   describe('#setInterval', function () {
     it('interval should execute indefinately', function (done) {
-      var count = 0;
-      var clock = new ClockTimer();
-      var delayed = clock.setInterval(() => {
+      let count = 0;
+
+      const clock = new ClockTimer();
+      const delayed = clock.setInterval(() => {
         count++;
       }, 50);
 
       assert.equal(1, clock.delayed.length);
 
-      var testTimeout = setInterval(() => {
+      const testTimeout = setInterval(() => {
         clock.tick();
 
         if (!delayed.active) {
@@ -44,11 +87,43 @@ describe('clock', function() {
         }
       }, 25);
     });
+
+    it('should pause and resume intervals', function(done) {
+      let count = 0;
+
+      const clock = new ClockTimer();
+      const delayed = clock.setInterval(() => { count++; }, 30);
+
+      assert.equal(1, clock.delayed.length);
+
+      const testTimeout = setInterval(() => {
+        clock.tick();
+
+        if (!delayed.active) {
+          assert.equal(0, clock.delayed.length);
+          clearTimeout(testTimeout);
+          done();
+        }
+
+        assert.equal(true, delayed.active);
+        if (delayed.paused && count >= 4) {
+          delayed.resume();
+
+        } else if (count === 10) {
+          delayed.clear();
+
+        } else if (count >= 4) {
+          delayed.pause();
+
+        }
+      }, 30);
+
+    });
   });
 
   describe('#clear', function () {
     it('should clear all timeouts/intervals', function () {
-      var clock = new ClockTimer();
+      const clock = new ClockTimer();
       clock.setInterval(() => {}, 50);
       clock.setInterval(() => {}, 100);
       clock.setTimeout(() => {}, 200);

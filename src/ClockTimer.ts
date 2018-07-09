@@ -13,10 +13,14 @@ export class ClockTimer extends Clock {
 
         let i = this.delayed.length;
         while (i--) {
-            this.delayed[i].tick(this.deltaTime);
+            const delayed = this.delayed[i];
 
-            if (!this.delayed[i].active) {
+            if (delayed.active) {
+                delayed.tick(this.deltaTime);
+
+            } else {
                 this.delayed.splice(i, 1);
+                continue;
             }
         }
     }

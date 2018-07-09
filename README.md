@@ -28,9 +28,12 @@ See a quote from [W3C Timers Specification](http://www.w3.org/TR/2011/WD-html5-2
 
 **Delayed**
 
-- `active` -> `Boolean` - Is it still active?
 - `clear()` -> `void` - Clear timeout/interval
 - `reset()` -> `void` - Reset elapsed time
+- `active` -> `Boolean` - Is it still active?
+- `pause()` -> `void` - Pause the execution
+- `resume()` -> `void` - Continue the execution
+- `paused` -> `Boolean` - Is is paused?
 
 ## License
 
