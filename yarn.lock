@@ -6,9 +6,10 @@
   version "1.1.8"
   resolved "https://registry.npmjs.org/@gamestdio/clock/-/clock-1.1.8.tgz#bf99f2befffa5976c3173fe1de5a52d9dce169ef"
 
-"@types/mocha@^2.2.41":
-  version "2.2.41"
-  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.41.tgz#e27cf0817153eb9f2713b2d3f6c68f1e1c3ca608"
+"@types/mocha@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-5.2.6.tgz#b8622d50557dd155e9f2f634b7d68fd38de5e94b"
+  integrity sha512-1axi39YdtBI7z957vdqXI4Ac25e7YihYQtJa+Clnxg1zTJEaIRbndt71O3sP4GAMgiAm0pY26/b9BrY4MR/PMw==
 
 ansi-styles@^3.1.0:
   version "3.1.0"
