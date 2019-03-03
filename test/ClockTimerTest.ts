@@ -66,9 +66,7 @@ describe('clock', function() {
       let count = 0;
 
       const clock = new ClockTimer();
-      const delayed = clock.setInterval(() => {
-        count++;
-      }, 50);
+      const delayed = clock.setInterval(() => count++, 50);
 
       assert.equal(1, clock.delayed.length);
 
@@ -78,7 +76,7 @@ describe('clock', function() {
         if (!delayed.active) {
           assert.equal(0, clock.delayed.length);
           clearTimeout(testTimeout);
-          done();
+          return done();
         }
 
         assert.equal(true, delayed.active);
@@ -102,7 +100,7 @@ describe('clock', function() {
         if (!delayed.active) {
           assert.equal(0, clock.delayed.length);
           clearTimeout(testTimeout);
-          done();
+          return done();
         }
 
         assert.equal(true, delayed.active);

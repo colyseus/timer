@@ -1,7 +1,5 @@
 # @gamestdio/timer [![Build Status](https://secure.travis-ci.org/gamestdio/timer.png?branch=master)](http://travis-ci.org/gamestdio/timer)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/gamestdio/timer.svg)](https://greenkeeper.io/)
-
 Timing Events tied to [@gamestdio/clock](https://github.com/gamestdio/clock).
 
 `ClockTimer` is a subclass of `Clock`, which adds methods to handle timeout and
