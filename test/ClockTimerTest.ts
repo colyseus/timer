@@ -131,6 +131,19 @@ describe('clock', function() {
       clock.clear();
       assert.equal(0, clock.delayed.length);
     });
+
+    it('should clear all timeouts during a tick without throwing an error', function () {
+      const clock = new ClockTimer();
+
+      clock.setTimeout(() => {}, 0);
+      clock.setTimeout(() => {
+        clock.clear();
+      }, 0);
+      clock.setTimeout(() => {}, 0);
+
+      clock.tick();
+      assert.equal(0, clock.delayed.length);
+    });
   });
 
 });
