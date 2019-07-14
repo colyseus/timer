@@ -11,9 +11,10 @@ export class ClockTimer extends Clock {
     tick () {
         super.tick();
 
-        let i = this.delayed.length;
+        let delayedList = this.delayed;
+        let i = delayedList.length;
         while (i--) {
-            const delayed = this.delayed[i];
+            const delayed = delayedList[i];
 
             if (delayed.active) {
                 delayed.tick(this.deltaTime);
