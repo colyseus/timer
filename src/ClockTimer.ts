@@ -41,7 +41,7 @@ export class ClockTimer extends Clock {
     clear () {
         let i = this.delayed.length;
         while (i--) { this.delayed[i].clear(); }
-        this.delayed = [];
+        // this.delayed = [];
     }
 
 }
