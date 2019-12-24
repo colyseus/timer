@@ -1,6 +1,6 @@
 {
   "name": "@gamestdio/timer",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Timing Events tied to @gamestdio/clock",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

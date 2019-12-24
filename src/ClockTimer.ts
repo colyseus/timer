@@ -13,6 +13,7 @@ export class ClockTimer extends Clock {
 
         let delayedList = this.delayed;
         let i = delayedList.length;
+
         while (i--) {
             const delayed = delayedList[i];
 
@@ -20,7 +21,7 @@ export class ClockTimer extends Clock {
                 delayed.tick(this.deltaTime);
 
             } else {
-                this.delayed.splice(i, 1);
+                delayedList.splice(i, 1);
                 continue;
             }
         }

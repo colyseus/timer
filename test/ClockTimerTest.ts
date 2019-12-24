@@ -1,10 +1,10 @@
 import * as assert from 'assert';
 import ClockTimer from "../src";
 
-describe('clock', function() {
+describe('clock', () => {
 
-  describe('#setTimeout', function () {
-    it('timeout should execute only once', function (done) {
+  describe('#setTimeout', () => {
+    it('timeout should execute only once', (done) => {
       const clock = new ClockTimer();
 
       const delayed = clock.setTimeout(() => {
@@ -18,7 +18,7 @@ describe('clock', function() {
       }, 100);
     });
 
-    it('should allow to pause a timeout', function (done) {
+    it('should allow to pause a timeout', (done) => {
       const clock = new ClockTimer();
 
       const delayed = clock.setTimeout(() => {
@@ -59,10 +59,25 @@ describe('clock', function() {
       }, 70);
 
     });
+
+    it("should be cleared after execution", () => {
+      const clock = new ClockTimer();
+      clock.setTimeout(() => {}, 0);
+      clock.setTimeout(() => {}, 0);
+      clock.setTimeout(() => {}, 0);
+      clock.setTimeout(() => {}, 0);
+      assert.equal(4, clock.delayed.length);
+
+      clock.tick();
+      assert.equal(4, clock.delayed.filter(d => !d.active).length);
+
+      clock.tick(); // next tick clears inactive
+      assert.equal(0, clock.delayed.length);
+    })
   });
 
-  describe('#setInterval', function () {
-    it('interval should execute indefinately', function (done) {
+  describe('#setInterval', () => {
+    it('interval should execute indefinately', (done) => {
       let count = 0;
 
       const clock = new ClockTimer();
@@ -86,7 +101,7 @@ describe('clock', function() {
       }, 25);
     });
 
-    it('should pause and resume intervals', function(done) {
+    it('should pause and resume intervals', (done) => {
       let count = 0;
 
       const clock = new ClockTimer();
@@ -119,8 +134,8 @@ describe('clock', function() {
     });
   });
 
-  describe('#clear', function () {
-    it('should clear all timeouts/intervals', function () {
+  describe('#clear', () => {
+    it('should clear all timeouts/intervals', () => {
       const clock = new ClockTimer();
       clock.setInterval(() => {}, 50);
       clock.setInterval(() => {}, 100);
@@ -132,7 +147,7 @@ describe('clock', function() {
       assert.equal(0, clock.delayed.length);
     });
 
-    it('should clear all timeouts during a tick without throwing an error', function () {
+    it('should clear all timeouts during a tick without throwing an error', () => {
       const clock = new ClockTimer();
 
       clock.setTimeout(() => {}, 0);
@@ -143,6 +158,22 @@ describe('clock', function() {
 
       clock.tick();
       assert.equal(0, clock.delayed.length);
+    });
+
+    it("should allow setting a timeout right after clearing", (done) => {
+      const clock = new ClockTimer();
+
+      clock.setTimeout(() => {}, 0);
+
+      clock.setTimeout(() => {
+        clock.clear();
+        clock.setTimeout(() => done(), 100);
+      }, 0);
+
+      clock.tick();
+
+      setTimeout(() => clock.tick(), 150);
+      assert.equal(1, clock.delayed.length);
     });
   });
 
