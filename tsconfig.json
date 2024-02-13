@@ -1,19 +1,14 @@
 {
   "compilerOptions": {
     "outDir": "lib",
-    "target": "ES5",
+    "target": "ES2016",
+    "esModuleInterop": true,
     "module": "commonjs",
     "noImplicitAny": false,
     "sourceMap": false,
     "allowSyntheticDefaultImports": true,
     "declaration": true
   },
-  "include": [
-    "src/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "test",
-    "dist"
-  ]
+  "include": ["src/*.ts"],
+  "exclude": ["node_modules", "test", "dist"]
 }

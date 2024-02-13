@@ -1,10 +1,9 @@
-import * as assert from 'assert';
+import * as assert from "assert";
 import ClockTimer from "../src";
 
-describe('clock', () => {
-
-  describe('#setTimeout', () => {
-    it('timeout should execute only once', (done) => {
+describe("clock", () => {
+  describe("#setTimeout", () => {
+    it("timeout should execute only once", (done) => {
       const clock = new ClockTimer();
 
       const delayed = clock.setTimeout(() => {
@@ -18,7 +17,7 @@ describe('clock', () => {
       }, 100);
     });
 
-    it('should allow to pause a timeout', (done) => {
+    it("should allow to pause a timeout", (done) => {
       const clock = new ClockTimer();
 
       const delayed = clock.setTimeout(() => {
@@ -55,9 +54,8 @@ describe('clock', () => {
               done();
             }, 20);
           }, 10);
-        }, 100)
+        }, 100);
       }, 70);
-
     });
 
     it("should be cleared after execution", () => {
@@ -69,15 +67,15 @@ describe('clock', () => {
       assert.equal(4, clock.delayed.length);
 
       clock.tick();
-      assert.equal(4, clock.delayed.filter(d => !d.active).length);
+      assert.equal(4, clock.delayed.filter((d) => !d.active).length);
 
       clock.tick(); // next tick clears inactive
       assert.equal(0, clock.delayed.length);
-    })
+    });
   });
 
-  describe('#setInterval', () => {
-    it('interval should execute indefinately', (done) => {
+  describe("#setInterval", () => {
+    it("interval should execute indefinately", (done) => {
       let count = 0;
 
       const clock = new ClockTimer();
@@ -101,11 +99,13 @@ describe('clock', () => {
       }, 25);
     });
 
-    it('should pause and resume intervals', (done) => {
+    it("should pause and resume intervals", (done) => {
       let count = 0;
 
       const clock = new ClockTimer();
-      const delayed = clock.setInterval(() => { count++; }, 30);
+      const delayed = clock.setInterval(() => {
+        count++;
+      }, 30);
 
       assert.equal(1, clock.delayed.length);
 
@@ -121,21 +121,17 @@ describe('clock', () => {
         assert.equal(true, delayed.active);
         if (delayed.paused && count >= 4) {
           delayed.resume();
-
         } else if (count === 10) {
           delayed.clear();
-
         } else if (count >= 4) {
           delayed.pause();
-
         }
       }, 30);
-
     });
   });
 
-  describe('#clear', () => {
-    it('should clear all timeouts/intervals', () => {
+  describe("#clear", () => {
+    it("should clear all timeouts/intervals", () => {
       const clock = new ClockTimer();
       clock.setInterval(() => {}, 50);
       clock.setInterval(() => {}, 100);
@@ -147,7 +143,7 @@ describe('clock', () => {
       assert.equal(0, clock.delayed.length);
     });
 
-    it('should clear all timeouts during a tick without throwing an error', () => {
+    it("should clear all timeouts during a tick without throwing an error", () => {
       const clock = new ClockTimer();
 
       clock.setTimeout(() => {}, 0);
@@ -177,5 +173,32 @@ describe('clock', () => {
     });
   });
 
-});
+  describe("Promise", () => {
+    it("Should resolve after given time", (done) => {
+      const clock = new ClockTimer();
+      const start = Date.now();
+      clock.duration(1000).then(() => {
+        assert.ok(Date.now() - start >= 1000);
+        done();
+      });
 
+      setTimeout(() => clock.tick(), 1000);
+    });
+
+    it("Should throw when cleared", (done) => {
+      const clock = new ClockTimer();
+      const start = Date.now();
+      let hasThrown = false;
+      clock.duration(1000).catch((e) => {
+        hasThrown = true;
+      });
+      clock.clear();
+
+      setTimeout(() => {
+        clock.tick();
+        assert.ok(hasThrown === true);
+        done();
+      }, 1000);
+    });
+  });
+});

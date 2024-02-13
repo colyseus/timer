@@ -13,7 +13,7 @@ is guaranteed to execute in a precise way.
 
 See a quote from [W3C Timers Specification](http://www.w3.org/TR/2011/WD-html5-20110525/timers.html):
 
-> This API does not guarantee that timers will fire exactly on schedule.  Delays
+> This API does not guarantee that timers will fire exactly on schedule. Delays
 > due to CPU load, other tasks, etc, are to be expected.
 
 ## API
@@ -22,7 +22,8 @@ See a quote from [W3C Timers Specification](http://www.w3.org/TR/2011/WD-html5-2
 
 - `setInterval(handler, time, ...args)` -> `Delayed`
 - `setTimeout(handler, time, ...args)` -> `Delayed`
-- `clear()` - clear all intervals and timeouts.
+- `duration(ms: number)` -> `Promise<void>` - Convenience method to wait for a duration in async functions or promises. See associated JSdoc for more details.
+- `clear()` - clear all intervals and timeouts, and throw any promise created with `duration`.
 
 **Delayed**
 
