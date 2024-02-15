@@ -1,13 +1,22 @@
 import Clock from "@gamestdio/clock";
-import { AsyncDelayed, Delayed, IDelayed, Type } from "./Delayed";
+import { Delayed, IDelayed, Type } from "./Delayed";
+import { TimerClearedError } from "./TimerClearedError";
 
 export class ClockTimer extends Clock {
+  /**
+   * An array of all the scheduled timeouts and intervals.
+   * @private For compatibility it's public but avoid modifying it directly.
+   */
   delayed: Array<IDelayed> = [];
 
   constructor(autoStart: boolean = false) {
     super(autoStart);
   }
 
+  /**
+   * Re-evaluate all the scheduled timeouts and intervals and execute appropriate handlers.
+   * Use this in your own context or not if your passed `autoStart` as `true` in the constructor.
+   */
   tick() {
     super.tick();
 
@@ -54,7 +63,7 @@ export class ClockTimer extends Clock {
   /**
    * A promise that schedule a timeout that will resolves after the given time.
    *
-   * If the {@link AsyncDelayed} is cleared before the time, the promise will be rejected.
+   * If the {@link Delayed} instance is cleared before the time, the promise will be rejected. This happens when the {@link ClockTimer.clear} method is called.
    *
    * For the sake of simplicity of this API, you can only cancel a timeout scheduled with this method with {@link ClockTimer.clear} method (which clears all scheduled timeouts and intervals).
    * If you need fine-tuned control over the timeout, use the {@link ClockTimer.setTimeout} method instead.
@@ -80,14 +89,16 @@ export class ClockTimer extends Clock {
    * ```
    *
    *
-   * @param ms
-   * @returns
+   * @param ms the duration in milliseconds in which the promise will be resolved
    */
   duration(ms: number): Promise<void> {
     return new Promise((resolve, reject) => {
-      const delayed = new AsyncDelayed(resolve, reject, ms);
+      const delayed = new Delayed(resolve, undefined, ms, Type.Async);
+      delayed.clear = () => {
+        delayed.active = false;
+        reject(new TimerClearedError()); // To be able to use instanceof in try / catch blocks
+      };
       this.delayed.push(delayed);
-      return delayed;
     });
   }
 

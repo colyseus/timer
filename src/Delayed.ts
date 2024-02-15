@@ -1,6 +1,7 @@
 export enum Type {
   Interval,
   Timeout,
+  Async,
 }
 
 export interface IDelayed {
@@ -52,6 +53,7 @@ export class Delayed implements IDelayed {
 
     switch (this.type) {
       case Type.Timeout:
+      case Type.Async:
         this.active = false;
         break;
       case Type.Interval:
@@ -74,49 +76,5 @@ export class Delayed implements IDelayed {
 
   clear() {
     this.active = false;
-  }
-}
-
-/**
- * A special Delayed that handle Promise for async function.
- */
-export class AsyncDelayed implements IDelayed {
-  public active: boolean = true;
-  public paused: boolean = false;
-  public elapsedTime: number = 0;
-  public time: number;
-
-  constructor(private resolve: () => void, private reject: (reason?: any) => void, ms: number) {
-    this.time = ms;
-  }
-
-  tick(deltaTime: number): void {
-    if (this.paused) return;
-
-    // Update the elapsed time
-    this.elapsedTime += deltaTime;
-
-    if (this.elapsedTime >= this.time) this.execute();
-  }
-
-  execute() {
-    this.resolve(); // Resolve the promise
-  }
-
-  reset(): void {
-    this.elapsedTime = 0;
-  }
-
-  pause() {
-    this.paused = true;
-  }
-
-  resume() {
-    this.paused = false;
-  }
-
-  clear() {
-    this.active = false;
-    this.reject(new Error("Timer has been cleared"));
   }
 }

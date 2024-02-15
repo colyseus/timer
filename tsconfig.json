@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "lib",
-    "target": "ES2016",
+    "target": "ES2015",
     "esModuleInterop": true,
     "module": "commonjs",
     "noImplicitAny": false,

@@ -1,2 +1,4 @@
 src
+.changeset
+node_modules
 test

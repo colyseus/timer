@@ -1,5 +1,5 @@
-import * as assert from "assert";
-import ClockTimer from "../src";
+import assert from "assert";
+import ClockTimer, { TimerClearedError } from "../src";
 
 describe("clock", () => {
   describe("#setTimeout", () => {
@@ -7,12 +7,12 @@ describe("clock", () => {
       const clock = new ClockTimer();
 
       const delayed = clock.setTimeout(() => {
-        assert.equal(delayed.elapsedTime, clock.elapsedTime);
+        assert.strictEqual(delayed.elapsedTime, clock.elapsedTime);
       }, 100);
 
       setTimeout(() => {
         clock.tick();
-        assert.equal(false, delayed.active);
+        assert.strictEqual(false, delayed.active);
         done();
       }, 100);
     });
@@ -29,27 +29,27 @@ describe("clock", () => {
         clock.tick();
         delayed.pause();
 
-        assert.equal(true, delayed.active);
-        assert.equal(true, delayed.paused);
+        assert.strictEqual(true, delayed.active);
+        assert.strictEqual(true, delayed.paused);
 
         setTimeout(() => {
           clock.tick();
           delayed.resume();
 
-          assert.equal(true, delayed.active);
-          assert.equal(false, delayed.paused);
+          assert.strictEqual(true, delayed.active);
+          assert.strictEqual(false, delayed.paused);
 
           setTimeout(() => {
             clock.tick();
 
-            assert.equal(true, delayed.active);
-            assert.equal(false, delayed.paused);
+            assert.strictEqual(true, delayed.active);
+            assert.strictEqual(false, delayed.paused);
 
             setTimeout(() => {
               clock.tick();
 
-              assert.equal(false, delayed.active);
-              assert.equal(false, delayed.paused);
+              assert.strictEqual(false, delayed.active);
+              assert.strictEqual(false, delayed.paused);
 
               done();
             }, 20);
@@ -64,13 +64,13 @@ describe("clock", () => {
       clock.setTimeout(() => {}, 0);
       clock.setTimeout(() => {}, 0);
       clock.setTimeout(() => {}, 0);
-      assert.equal(4, clock.delayed.length);
+      assert.strictEqual(4, clock.delayed.length);
 
       clock.tick();
-      assert.equal(4, clock.delayed.filter((d) => !d.active).length);
+      assert.strictEqual(4, clock.delayed.filter((d) => !d.active).length);
 
       clock.tick(); // next tick clears inactive
-      assert.equal(0, clock.delayed.length);
+      assert.strictEqual(0, clock.delayed.length);
     });
   });
 
@@ -81,18 +81,18 @@ describe("clock", () => {
       const clock = new ClockTimer();
       const delayed = clock.setInterval(() => count++, 50);
 
-      assert.equal(1, clock.delayed.length);
+      assert.strictEqual(1, clock.delayed.length);
 
       const testTimeout = setInterval(() => {
         clock.tick();
 
         if (!delayed.active) {
-          assert.equal(0, clock.delayed.length);
+          assert.strictEqual(0, clock.delayed.length);
           clearTimeout(testTimeout);
           return done();
         }
 
-        assert.equal(true, delayed.active);
+        assert.strictEqual(true, delayed.active);
         if (count > 10) {
           delayed.clear();
         }
@@ -107,18 +107,18 @@ describe("clock", () => {
         count++;
       }, 30);
 
-      assert.equal(1, clock.delayed.length);
+      assert.strictEqual(1, clock.delayed.length);
 
       const testTimeout = setInterval(() => {
         clock.tick();
 
         if (!delayed.active) {
-          assert.equal(0, clock.delayed.length);
+          assert.strictEqual(0, clock.delayed.length);
           clearTimeout(testTimeout);
           return done();
         }
 
-        assert.equal(true, delayed.active);
+        assert.strictEqual(true, delayed.active);
         if (delayed.paused && count >= 4) {
           delayed.resume();
         } else if (count === 10) {
@@ -137,10 +137,10 @@ describe("clock", () => {
       clock.setInterval(() => {}, 100);
       clock.setTimeout(() => {}, 200);
       clock.setTimeout(() => {}, 300);
-      assert.equal(4, clock.delayed.length);
+      assert.strictEqual(4, clock.delayed.length);
 
       clock.clear();
-      assert.equal(0, clock.delayed.length);
+      assert.strictEqual(0, clock.delayed.length);
     });
 
     it("should clear all timeouts during a tick without throwing an error", () => {
@@ -153,7 +153,7 @@ describe("clock", () => {
       clock.setTimeout(() => {}, 0);
 
       clock.tick();
-      assert.equal(0, clock.delayed.length);
+      assert.strictEqual(0, clock.delayed.length);
     });
 
     it("should allow setting a timeout right after clearing", (done) => {
@@ -169,7 +169,7 @@ describe("clock", () => {
       clock.tick();
 
       setTimeout(() => clock.tick(), 150);
-      assert.equal(1, clock.delayed.length);
+      assert.strictEqual(1, clock.delayed.length);
     });
   });
 
@@ -185,18 +185,18 @@ describe("clock", () => {
       setTimeout(() => clock.tick(), 1000);
     });
 
-    it("Should throw when cleared", (done) => {
+    it("Should throw when cleared and remove fn", (done) => {
       const clock = new ClockTimer();
-      const start = Date.now();
-      let hasThrown = false;
-      clock.duration(1000).catch((e) => {
-        hasThrown = true;
-      });
+      let error: TimerClearedError | null = null;
+      clock.duration(1000).catch((e) => (error = e));
       clock.clear();
 
       setTimeout(() => {
         clock.tick();
-        assert.ok(hasThrown === true);
+        assert.ok(clock.delayed.length === 0);
+        assert.ok(error instanceof TimerClearedError);
+        assert.ok(error instanceof Error); // Base class
+        assert.throws;
         done();
       }, 1000);
     });

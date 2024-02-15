@@ -21,15 +21,20 @@
     "deltatime"
   ],
   "author": "Endel Dreyer",
+  "contributors": [
+    "Andréas HANSS <contact@codingspark.io> (https://github.com/ScreamZ)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/colyseus/timer/issues"
   },
   "homepage": "https://github.com/colyseus/timer#readme",
   "dependencies": {
+    "@changesets/cli": "^2.27.1",
     "@gamestdio/clock": "^1.1.9"
   },
   "devDependencies": {
+    "@types/assert": "^1.5.10",
     "@types/mocha": "^10.0.6",
     "assert": "^2.1.0",
     "mocha": "^10.3.0",
