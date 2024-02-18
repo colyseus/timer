@@ -4,21 +4,7 @@ export enum Type {
   Async,
 }
 
-export interface IDelayed {
-  active: boolean;
-  paused: boolean;
-  time: number;
-  elapsedTime: number;
-
-  tick(deltaTime: number): void;
-  execute(): void;
-  reset(): void;
-  pause(): void;
-  resume(): void;
-  clear(): void;
-}
-
-export class Delayed implements IDelayed {
+export class Delayed {
   public active: boolean = true;
   public paused: boolean = false;
 

@@ -1,5 +1,5 @@
 import Clock from "@gamestdio/clock";
-import { Delayed, IDelayed, Type } from "./Delayed";
+import { Delayed, Type } from "./Delayed";
 import { TimerClearedError } from "./TimerClearedError";
 
 export class ClockTimer extends Clock {
@@ -7,7 +7,7 @@ export class ClockTimer extends Clock {
    * An array of all the scheduled timeouts and intervals.
    * @private For compatibility it's public but avoid modifying it directly.
    */
-  delayed: Array<IDelayed> = [];
+  delayed: Delayed[] = [];
 
   constructor(autoStart: boolean = false) {
     super(autoStart);
