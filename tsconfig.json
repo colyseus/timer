@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "lib",
+    "outDir": "build",
     "target": "ES2015",
     "esModuleInterop": true,
     "module": "commonjs",
@@ -9,6 +9,5 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true
   },
-  "include": ["src/*.ts"],
-  "exclude": ["node_modules", "test", "dist"]
+  "include": ["src/*.ts"]
 }

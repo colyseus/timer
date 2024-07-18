@@ -1,4 +1,4 @@
-import type { ClockTimer as Clock } from "./ClockTimer";
+import type { ClockTimer as Clock } from "./ClockTimer.js";
 /**
  * An error that occurs when the promise of a {@link Clock.duration} is rejected because the timer has been cleared by the clock instance.
  */

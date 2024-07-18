@@ -1,6 +1,6 @@
-import Clock from "@gamestdio/clock";
-import { Delayed, Type } from "./Delayed";
-import { TimerClearedError } from "./TimerClearedError";
+import Clock from "@colyseus/clock";
+import { Delayed, Type } from "./Delayed.js";
+import { TimerClearedError } from "./TimerClearedError.js";
 
 export class ClockTimer extends Clock {
   /**

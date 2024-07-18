@@ -1,12 +1,20 @@
 {
-  "name": "@gamestdio/timer",
-  "version": "1.4.2",
-  "description": "Timing Events tied to @gamestdio/clock",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "name": "@colyseus/timer",
+  "version": "1.0.0",
+  "description": "Timing Events tied to @colyseus/clock",
+  "main": "build/index.js",
+  "module": "build/index.mjs",
+  "typings": "build/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./build/index.mjs",
+      "require": "./build/index.js"
+    }
+  },
   "scripts": {
-    "prepublishOnly": "tsc",
-    "test": "mocha --require ts-node/register test/**Test.ts"
+    "build": "tsc --emitDeclarationOnly && node build.mjs",
+    "test": "mocha --require ts-node/register test/**Test.ts",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -30,13 +38,15 @@
   },
   "homepage": "https://github.com/colyseus/timer#readme",
   "dependencies": {
-    "@gamestdio/clock": "^1.1.9"
+    "@colyseus/clock": "^1.0.0"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@types/assert": "^1.5.10",
     "@types/mocha": "^10.0.6",
     "assert": "^2.1.0",
+    "esbuild": "^0.23.0",
+    "fast-glob": "^3.3.2",
     "mocha": "^10.3.0",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
