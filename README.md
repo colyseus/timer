@@ -1,4 +1,4 @@
-# @gamestdio/timer
+# @colyseus/timer
 
 Timing Events tied to [colyseus/clock](https://github.com/colyseus/clock).
 
