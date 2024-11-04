@@ -17,7 +17,7 @@ export class ClockTimer extends Clock {
    * Re-evaluate all the scheduled timeouts and intervals and execute appropriate handlers.
    * Use this in your own context or not if your passed `autoStart` as `true` in the constructor.
    */
-  tick() {
+  override tick() {
     super.tick();
 
     let delayedList = this.delayed;
@@ -26,7 +26,7 @@ export class ClockTimer extends Clock {
     while (i--) {
       const delayed = delayedList[i];
 
-      if (delayed.active) {
+      if (delayed?.active) {
         delayed.tick(this.deltaTime);
       } else {
         delayedList.splice(i, 1);
@@ -111,7 +111,7 @@ export class ClockTimer extends Clock {
   clear() {
     let i = this.delayed.length;
     while (i--) {
-      this.delayed[i].clear();
+      this.delayed[i]?.clear();
     }
     this.delayed = [];
   }
