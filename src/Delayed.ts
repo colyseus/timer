@@ -12,10 +12,10 @@ export class Delayed {
   public elapsedTime: number = 0;
 
   protected handler: Function;
-  protected args: any;
+  protected args: unknown;
   protected type: number;
 
-  constructor(handler: Function, args: any, time: number, type: number) {
+  constructor(handler: Function, args: unknown, time: number, type: number) {
     this.handler = handler;
     this.args = args;
     this.time = time;
