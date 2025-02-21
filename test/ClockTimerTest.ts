@@ -1,4 +1,5 @@
 import assert from "assert";
+import timers from "timers/promises"
 import ClockTimer, { TimerClearedError } from "../src";
 
 describe("clock", () => {
@@ -129,6 +130,32 @@ describe("clock", () => {
       }, 30);
     });
   });
+
+  describe("Delayed", () => {
+    it("should not execute after .clear()", async () => {
+      const clock = new ClockTimer();
+
+      let executions = 0;
+      const delayed = clock.setInterval(() => executions++, 10);
+
+      await timers.setTimeout(10);
+      clock.tick();
+      await timers.setTimeout(10);
+      clock.tick();
+      await timers.setTimeout(10);
+      clock.tick();
+
+      assert.strictEqual(3, executions);
+      delayed.clear();
+
+      await timers.setTimeout(10);
+      clock.tick();
+      await timers.setTimeout(10);
+      clock.tick();
+
+      assert.strictEqual(3, executions);
+    });
+  })
 
   describe("#clear", () => {
     it("should clear all timeouts/intervals", () => {
