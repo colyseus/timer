@@ -1,6 +1,6 @@
 {
   "name": "@colyseus/timer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Timing Events tied to @colyseus/clock",
   "main": "build/index.js",
   "module": "build/index.mjs",
@@ -17,6 +17,9 @@
     "test": "mocha --require tsx test/**Test.ts",
     "prepublishOnly": "npm run build"
   },
+  "files": [
+    "build", "LICENSE", "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/colyseus/timer.git"
