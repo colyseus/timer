@@ -1,13 +1,13 @@
 {
   "name": "@colyseus/timer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Timing Events tied to @colyseus/clock",
   "main": "build/index.js",
   "module": "build/index.mjs",
   "typings": "build/index.d.ts",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
+      "types": "./build/index.d.ts",
       "import": "./build/index.mjs",
       "require": "./build/index.js"
     }
