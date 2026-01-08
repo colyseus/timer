@@ -1,6 +1,6 @@
 import assert from "assert";
 import timers from "timers/promises"
-import ClockTimer, { TimerClearedError } from "../src";
+import { ClockTimer, TimerClearedError } from "../src";
 
 describe("clock", () => {
   describe("#setTimeout", () => {

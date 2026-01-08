@@ -1,4 +1,4 @@
-import Clock from "@colyseus/clock";
+import { Clock } from "@colyseus/clock";
 import { Delayed, Type } from "./Delayed.js";
 import { TimerClearedError } from "./TimerClearedError.js";
 

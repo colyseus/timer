@@ -28,6 +28,11 @@ Other cool stuff is that you manage all your timers in one place and therefore y
 
 ## API
 
+```typescript
+import { ClockTimer } from "@colyseus/timer";
+const timer = new ClockTimer();
+```
+
 **Clock**
 
 - `setInterval(handler, time, ...args)` -> `Delayed`

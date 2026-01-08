@@ -1,4 +1,9 @@
-# @gamestdio/timer
+# @colyseus/timer
+
+## 2.0.0
+
+- Do not export default. Export named `ClockTimer`.
+- Fixes ESM build. 
 
 ## 1.4.0
 
