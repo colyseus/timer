@@ -25,6 +25,7 @@ async function main() {
     outdir,
     format: "cjs",
     target,
+    bundle: true,
     sourcemap: "external",
     platform: "node",
     outExtension: { '.js': '.cjs', },
