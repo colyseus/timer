@@ -27,6 +27,20 @@ async function main() {
     target,
     sourcemap: "external",
     platform: "node",
+    outExtension: { '.js': '.cjs', },
+    plugins: [{
+      name: 'add-cjs',
+      setup(build) {
+        build.onResolve({ filter: /.*/ }, (args) => {
+          if (args.importer) {
+            if (args.path.startsWith('.')) {
+              return { path: args.path.replace(/\.[jt]sx?$/, '.cjs'), external: true }
+            }
+            return { path: args.path, external: true }
+          }
+        })
+      },
+    }],
   });
 
   // ESM output
@@ -40,6 +54,19 @@ async function main() {
     sourcemap: "external",
     platform: "node",
     outExtension: { '.js': '.mjs', },
+    plugins: [{
+      name: 'add-mjs',
+      setup(build) {
+        build.onResolve({ filter: /.*/ }, (args) => {
+          if (args.importer) {
+            if (args.path.startsWith('.')) {
+              return { path: args.path.replace(/\.[jt]sx?$/, '.mjs'), external: true }
+            }
+            return { path: args.path, external: true }
+          }
+        })
+      },
+    }],
   });
 
   console.log("Done!");
